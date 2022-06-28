@@ -93,6 +93,7 @@ setup(
     author_email=__authoremail__,
     description=__description__,
     url='https://github.com/kemalaziezrachmansyah/nealmod',
+    package_dir={"":"src"}
     classifiers=classifiers,
     packages=packages,
     install_requires=install_requires,
