@@ -338,6 +338,8 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
             num_reads, ldata, irow, icol, qdata,
             num_sweeps_per_beta, beta_schedule,
             seed, initial_states_array, interrupt_function)
+        
+        print('YATTA!')
 
         info = {
             "beta_range": beta_range,
