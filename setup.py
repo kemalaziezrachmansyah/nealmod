@@ -87,7 +87,7 @@ exec(open("./neal/package_info.py").read())
 
 
 setup(
-    name='dwave-neal',
+    name='nealmod',
     version=__version__,
     author=__author__,
     author_email=__authoremail__,
