@@ -113,7 +113,7 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
     def sample(self, bqm, beta_range=None, num_reads=None, num_sweeps = None,
                num_sweeps_per_beta=1, beta_schedule_type="geometric", seed=None,
                interrupt_function=None, beta_schedule = None,
-               initial_states=None, initial_states_generator="random",
+               initial_states=None, initial_states_generator="random", onehotpar = None
                **kwargs):
         """Sample from a binary quadratic model using an implemented sample 
         method.
