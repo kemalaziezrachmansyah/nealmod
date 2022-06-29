@@ -105,7 +105,7 @@ void simulated_annealing_run(
     int other_index;
     int base_index;
     double energydiff;
-    char *statedummy;
+    char *statedummy = (char*)malloc(num_vars * sizeof(char));
     bool status;
     int ind;
     
@@ -152,8 +152,6 @@ void simulated_annealing_run(
                         statedummy[member_index] *= -1;
                         energydiff += get_flip_energy(other_index, statedummy, h, degrees,
                                                neighbors, neighbour_couplings);
-
-                        if (energydiff >= threshold) continue;
 
                         flip_spin = false;
 
