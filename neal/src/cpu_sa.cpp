@@ -107,8 +107,6 @@ void simulated_annealing_run(
     // build the delta_energy array by getting the delta energy for each
     // variable
     
-    cout << onehotpar;
-    
     for (int var = 0; var < num_vars; var++) {
         delta_energy[var] = get_flip_energy(var, state, h, degrees,
                                             neighbors, neighbour_couplings);
