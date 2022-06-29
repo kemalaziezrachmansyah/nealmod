@@ -261,6 +261,8 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
         # read out the initial states and the variable order
         initial_states_array = np.ascontiguousarray(
             parsed.initial_states.record.sample)
+        
+        print('initial_states_array: ', initial_states_array)
 
         variable_order = parsed.initial_states.variables
 
