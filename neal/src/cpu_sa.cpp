@@ -98,19 +98,7 @@ void simulated_annealing_run(
 ) {
     const int num_vars = h.size();
 
-    // this double array will hold the delta energy for every variable
-    // delta_energy[v] is the delta energy for variable `v`
-    double *delta_energy = (double*)malloc(num_vars * sizeof(double));
-
     uint64_t rand; // this will hold the value of the rng
-
-    // build the delta_energy array by getting the delta energy for each
-    // variable
-    
-    for (int var = 0; var < num_vars; var++) {
-        delta_energy[var] = get_flip_energy(var, state, h, degrees,
-                                            neighbors, neighbour_couplings);
-    }
 
     bool flip_spin;
     // perform the sweeps
@@ -127,54 +115,51 @@ void simulated_annealing_run(
             // the probability.
             const double threshold = 44.36142 / beta;
 
-            for (int var = 0; var < num_vars; var++) {
-                if (delta_energy[var] >= threshold) continue;
+            for (int group_index = 0; group_index < num_vars/onehotpar; group_index++) {
+                member_index = group_index*onehotpar;
+                for (int ind = 0; ind < onehotpar, ind++){
+                    
 
-                flip_spin = false;
+                    if (ind < onehotpar-1) {
+                        other_index = member_index + 1;
+                    }
+                    else {
+                        other_index = group_index*onehotpar;
+                    }
 
-                if (delta_energy[var] <= 0.0) {
-                    // automatically accept any flip that results in a lower 
-                    // energy
-                    flip_spin = true;
-                }
-                else {
-                    // get a random number, storing it in rand
-                    FASTRAND(rand); 
-                    // accept the flip if exp(-delta_energy*beta) > random(0, 1)
-                    if (exp(-delta_energy[var]*beta) * RANDMAX > rand) {
+                    energydiff = get_flip_energy(member_index, state, h, degrees,
+                                            neighbors, neighbour_couplings);
+                    energydiff += get_flip_energy(other_index, state, h, degrees,
+                                            neighbors, neighbour_couplings);
+
+                    if (energydiff >= threshold) continue;
+
+                    flip_spin = false;
+
+                    if (energydiff <= 0.0) {
+                        // automatically accept any flip that results in a lower 
+                        // energy
                         flip_spin = true;
                     }
-                }
-
-                if (flip_spin) {
-                    // since we have accepted the spin flip of variable `var`, 
-                    // we need to adjust the delta energies of all the 
-                    // neighboring variables
-                    const char multiplier = 4 * state[var];
-                    // iterate over the neighbors of `var`
-                    for (int n_i = 0; n_i < degrees[var]; n_i++) {
-                        int neighbor = neighbors[var][n_i];
-                        // adjust the delta energy by 
-                        // 4 * `var` state * coupler weight * neighbor state
-                        // the 4 is because the original contribution from 
-                        // `var` to the neighbor's delta energy was
-                        // 2 * `var` state * coupler weight * neighbor state,
-                        // so since we are flipping `var`'s state, we need to 
-                        // multiply it again by 2 to get the full offset.
-                        delta_energy[neighbor] += multiplier * 
-                            neighbour_couplings[var][n_i] * state[neighbor];
+                    else {
+                        // get a random number, storing it in rand
+                        FASTRAND(rand); 
+                        // accept the flip if exp(-delta_energy*beta) > random(0, 1)
+                        if (exp(-energydiff*beta) * RANDMAX > rand) {
+                            flip_spin = true;
+                        }
                     }
 
-                    // now we just need to flip its state and negate its delta 
-                    // energy
-                    state[var] *= -1;
-                    delta_energy[var] *= -1;
+                    if (flip_spin) {
+                        state[member_index] *= -1;
+                        state[other_index] *= -1;
+                    }
+
+                    member_index++;
                 }
             }
         }
     }
-
-    free(delta_energy);
 }
 
 // Returns the energy of a given state and problem
