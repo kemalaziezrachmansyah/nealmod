@@ -138,6 +138,8 @@ void simulated_annealing_run(
                     }
                 }
                 
+                member_index = base_index;
+                
                 ind = 0;
                 status = true;
                 
