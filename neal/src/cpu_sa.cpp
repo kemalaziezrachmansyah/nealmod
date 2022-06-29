@@ -107,6 +107,7 @@ void simulated_annealing_run(
     double energydiff;
     bool status;
     int ind;
+    int ind2;
     
     
     // perform the sweeps
@@ -125,45 +126,48 @@ void simulated_annealing_run(
 
             for (int group_index = 0; group_index < num_vars / onehotpar; group_index++) {
                 base_index = group_index*onehotpar;                
-                member_index = base_index+2;
-                
-                
                 
                 ind = 0;
                 status = true;
                 
                 while (ind < onehotpar && status){
-                    other_index = base_index + ind;
+                    member_index = base_index + ind;
+                    ind2 = ind1 + 1;
                     
-                    if (member_index != other_index) {
-                        energydiff = get_flip_energy(member_index, state, h, degrees,
-                                            neighbors, neighbour_couplings);
-                        char *statedummy = state;
-                        statedummy[member_index] *= -1;
-                        energydiff += get_flip_energy(other_index, statedummy, h, degrees,
-                                               neighbors, neighbour_couplings);
+                    while (ind2 < onehotpar && status) {
+                        other_index = base_index + ind2;
 
-                        flip_spin = false;
+                        if (state[member_index] != state[other_index]) {
+                            energydiff = get_flip_energy(member_index, state, h, degrees,
+                                                neighbors, neighbour_couplings);
+                            char *statedummy = state;
+                            statedummy[member_index] *= -1;
+                            energydiff += get_flip_energy(other_index, statedummy, h, degrees,
+                                                   neighbors, neighbour_couplings);
 
-                        if (energydiff <= 0.0) {
-                            // automatically accept any flip that results in a lower 
-                            // energy
-                            flip_spin = true;
-                        }
-                        else {
-                            // get a random number, storing it in rand
-                            FASTRAND(rand); 
-                            // accept the flip if exp(-delta_energy*beta) > random(0, 1)
-                            if (exp(-energydiff*beta) * RANDMAX > rand) {
+                            flip_spin = false;
+
+                            if (energydiff <= 0.0) {
+                                // automatically accept any flip that results in a lower 
+                                // energy
                                 flip_spin = true;
                             }
-                        }
+                            else {
+                                // get a random number, storing it in rand
+                                FASTRAND(rand); 
+                                // accept the flip if exp(-delta_energy*beta) > random(0, 1)
+                                if (exp(-energydiff*beta) * RANDMAX > rand) {
+                                    flip_spin = true;
+                                }
+                            }
 
-                        if (flip_spin) {
-                            state[member_index] *= -1;
-                            state[other_index] *= -1;
-                            status = false;
+                            if (flip_spin) {
+                                state[member_index] *= -1;
+                                state[other_index] *= -1;
+                                status = false;
+                            }
                         }
+                        ind2++;
                     }
                     ind++;
                 }
