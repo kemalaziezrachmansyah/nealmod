@@ -168,7 +168,7 @@ void simulated_annealing_run(
                         status = 0;
                     }
                     
-                    i++;
+                    ind++;
                 }
             }
         }
