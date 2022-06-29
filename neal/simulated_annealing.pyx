@@ -43,7 +43,7 @@ cdef extern from "cpu_sa.h":
 def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
                         coupler_weights, sweeps_per_beta, beta_schedule, seed,
                         np.ndarray[char, ndim=2, mode="c"] states_numpy,
-                        interrupt_function=None, ohehotpar = None):
+                        interrupt_function=None, ohehotpar):
     """Wraps `general_simulated_annealing` from `cpu_sa.cpp`. Accepts
     an Ising problem defined on a general graph and returns samples
     using simulated annealing."""
