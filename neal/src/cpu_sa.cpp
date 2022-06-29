@@ -125,7 +125,7 @@ void simulated_annealing_run(
 
             for (int group_index = 0; group_index < num_vars / onehotpar; group_index++) {
                 base_index = group_index*onehotpar;                
-                member_index = base_index+1;
+                member_index = base_index+2;
                 
                 
                 
