@@ -104,6 +104,7 @@ void simulated_annealing_run(
     int member_index;
     int other_index;
     double energydiff;
+    char statedummy;
     
     
     // perform the sweeps
@@ -122,19 +123,20 @@ void simulated_annealing_run(
 
             for (int group_index = 0; group_index < num_vars/onehotpar; group_index++) {
                 member_index = group_index*onehotpar;
+                
+                // finding the position of 1
+                while (state[member_index] == -1) {
+                    member_index++;
+                }
+                
                 for (int ind = 0; ind < onehotpar; ind++){
-                    
-
-                    if (ind < onehotpar-1) {
-                        other_index = member_index + 1;
-                    }
-                    else {
-                        other_index = group_index*onehotpar;
-                    }
+                    other_index = (group_index*onehotpar) + (member_index+ind % onehotpar);
 
                     energydiff = get_flip_energy(member_index, state, h, degrees,
                                             neighbors, neighbour_couplings);
-                    energydiff += get_flip_energy(other_index, state, h, degrees,
+                    statedummy = state;
+                    statedummy[member_index] *= -1;
+                    energydiff += get_flip_energy(other_index, statedummy, h, degrees,
                                             neighbors, neighbour_couplings);
 
                     if (energydiff >= threshold) continue;
@@ -158,6 +160,7 @@ void simulated_annealing_run(
                     if (flip_spin) {
                         state[member_index] *= -1;
                         state[other_index] *= -1;
+                        continue;
                     }
 
                     member_index++;
