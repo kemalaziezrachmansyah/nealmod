@@ -36,19 +36,21 @@ cdef extern from "cpu_sa.h":
             const int sweeps_per_beta,
             const vector[double] & beta_schedule,
             const unsigned long long seed,
+            const int onehotpar,
             callback interrupt_callback,
             void *interrupt_function) nogil
 
 
 def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
-                        coupler_weights, sweeps_per_beta, beta_schedule, seed,
+                        coupler_weights, sweeps_per_beta, beta_schedule, seed, ohehotpar,
                         np.ndarray[char, ndim=2, mode="c"] states_numpy,
-                        interrupt_function=None, ohehotpar):
+                        interrupt_function=None):
     """Wraps `general_simulated_annealing` from `cpu_sa.cpp`. Accepts
     an Ising problem defined on a general graph and returns samples
     using simulated annealing."""
     
     print('states_numpy: ', states_numpy)
+    print('onehotpar: ', onehotpar)
 
     """
     Parameters
@@ -147,6 +149,7 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
                                           _sweeps_per_beta,
                                           _beta_schedule,
                                           _seed,
+                                          _onehotpar,
                                           interrupt_callback,
                                           _interrupt_function)
 
