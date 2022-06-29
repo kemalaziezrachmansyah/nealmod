@@ -128,7 +128,15 @@ void simulated_annealing_run(
                 base_index = group_index*onehotpar;                
                 member_index = base_index;
                 
-                
+                status = true;
+                while (status) {
+                    if (state[member_index] >= 0) {
+                        status = false
+                    }
+                    else {
+                        member_index++;    
+                    }
+                }
                 
                 ind = 0;
                 status = true;
