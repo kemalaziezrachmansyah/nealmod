@@ -136,7 +136,7 @@ void simulated_annealing_run(
                 status = true;
                 
                 while (ind < onehotpar && status){
-                    other_index = base_index + ind1;
+                    other_index = base_index + ind;
                     
                     if (member_index != other_index) {
                         energydiff = get_flip_energy(member_index, state, h, degrees,
