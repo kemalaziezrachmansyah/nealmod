@@ -106,6 +106,7 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
                            'interrupt_function': [],
                            'initial_states': [],
                            'initial_states_generator': [],
+                           'onehotpar': [],
                            }
         self.properties = {'beta_schedule_options': ('linear', 'geometric',
                                                      'custom')}
@@ -339,7 +340,7 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
         samples, energies = sa.simulated_annealing(
             num_reads, ldata, irow, icol, qdata,
             num_sweeps_per_beta, beta_schedule,
-            seed, initial_states_array, interrupt_function)
+            seed, initial_states_array, interrupt_function, onehotpar)
         
         print('YATTA!')
 
