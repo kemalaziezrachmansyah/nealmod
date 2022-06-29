@@ -129,7 +129,7 @@ void simulated_annealing_run(
                     member_index++;
                 }
                 
-                for (int ind = 0; ind < onehotpar; ind++){
+                for (int ind = 1; ind < onehotpar; ind++){
                     other_index = (group_index*onehotpar) + ((member_index+ind) % onehotpar);
 
                     energydiff = get_flip_energy(member_index, state, h, degrees,
@@ -162,8 +162,6 @@ void simulated_annealing_run(
                         state[other_index] *= -1;
                         continue;
                     }
-
-                    member_index++;
                 }
             }
         }
