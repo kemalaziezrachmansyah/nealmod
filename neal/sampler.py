@@ -248,7 +248,7 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
                          "value = {}".format(seed))
             raise ValueError(error_msg)
         
-         print('initial_states: ', initial_states)
+        print('initial_states: ', initial_states)
         
         # parse the inputs
         parsed = self.parse_initial_states(
