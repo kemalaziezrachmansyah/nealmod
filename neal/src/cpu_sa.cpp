@@ -106,7 +106,8 @@ void simulated_annealing_run(
     double energydiff;
     char *statedummy;
     bool status;
-    int ind;
+    int ind1;
+    int ind2;
     
     
     // perform the sweeps
@@ -126,48 +127,49 @@ void simulated_annealing_run(
             for (int group_index = 0; group_index < num_vars/onehotpar; group_index++) {
                 member_index = group_index*onehotpar;
                 
-                // finding the position of 1
-                while (state[member_index]*1 < 0) {
-                    member_index++;
-                }
-                
-                ind = 1;
+                ind1 = 1;
                 status = true;
                 
                 while (ind < onehotpar && status){
-                    other_index = (group_index*onehotpar) + ((member_index+ind) % onehotpar);
-
-                    energydiff = get_flip_energy(member_index, state, h, degrees,
-                                            neighbors, neighbour_couplings);
-                    statedummy = state;
-                    statedummy[member_index] *= -1;
-                    energydiff += get_flip_energy(other_index, statedummy, h, degrees,
-                                            neighbors, neighbour_couplings);
-
-                    if (energydiff >= threshold) continue;
-
-                    flip_spin = false;
-
-                    if (energydiff <= 0.0) {
-                        // automatically accept any flip that results in a lower 
-                        // energy
-                        flip_spin = true;
-                    }
-                    else {
-                        // get a random number, storing it in rand
-                        FASTRAND(rand); 
-                        // accept the flip if exp(-delta_energy*beta) > random(0, 1)
-                        if (exp(-energydiff*beta) * RANDMAX > rand) {
-                            flip_spin = true;
-                        }
-                    }
-
-                    if (flip_spin) {
-                        state[member_index] *= -1;
-                        state[other_index] *= -1;
-                        status = false;
-                    }
+                    ind2 = ind1 + 1;
+                    while (ind2 < onehotpar && status){
+                        other_index = member_index + ind;
                     
+                        if (state[member_index] * state[other_index] < 0) {
+                            energydiff = get_flip_energy(member_index, state, h, degrees,
+                                                neighbors, neighbour_couplings);
+                            statedummy = state;
+                            statedummy[member_index] *= -1;
+                            energydiff += get_flip_energy(other_index, statedummy, h, degrees,
+                                                    neighbors, neighbour_couplings);
+
+                            if (energydiff >= threshold) continue;
+
+                            flip_spin = false;
+
+                            if (energydiff <= 0.0) {
+                                // automatically accept any flip that results in a lower 
+                                // energy
+                                flip_spin = true;
+                            }
+                            else {
+                                // get a random number, storing it in rand
+                                FASTRAND(rand); 
+                                // accept the flip if exp(-delta_energy*beta) > random(0, 1)
+                                if (exp(-energydiff*beta) * RANDMAX > rand) {
+                                    flip_spin = true;
+                                }
+                            }
+
+                            if (flip_spin) {
+                                state[member_index] *= -1;
+                                state[other_index] *= -1;
+                                status = false;
+                            }
+                        }
+                        
+                        ind2++;
+                    }
                     ind++;
                 }
             }
