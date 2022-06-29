@@ -261,7 +261,11 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
         num_reads = parsed.num_reads
 
         # read out the initial states and the variable order
-        initial_states_array = initial_states
+        initial_states_array = -1*np.ones((1,len(init[0])), dtype='int8')
+        for i in range(len(initial_states[0]-1)):
+            if i % onehotpar == 0:
+                initial_states_array[0][i] = 1
+        
         
         print('initial_states_array: ', initial_states_array)
 
