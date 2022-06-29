@@ -132,7 +132,7 @@ void simulated_annealing_run(
                 
                 while (ind < onehotpar && status){
                     member_index = base_index + ind;
-                    ind2 = ind1 + 1;
+                    ind2 = ind + 1;
                     
                     while (ind2 < onehotpar && status) {
                         other_index = base_index + ind2;
