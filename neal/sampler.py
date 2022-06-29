@@ -103,18 +103,18 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
                            'num_sweeps_per_beta': [],
                            'beta_schedule_type': ['beta_schedule_options'],
                            'seed': [],
+                           'onehotpar': [],
                            'interrupt_function': [],
                            'initial_states': [],
                            'initial_states_generator': [],
-                           'onehotpar': [],
                            }
         self.properties = {'beta_schedule_options': ('linear', 'geometric',
                                                      'custom')}
 
     def sample(self, bqm, beta_range=None, num_reads=None, num_sweeps = None,
-               num_sweeps_per_beta=1, beta_schedule_type="geometric", seed=None,
+               num_sweeps_per_beta=1, beta_schedule_type="geometric", seed=None, onehotpar = None,
                interrupt_function=None, beta_schedule = None,
-               initial_states=None, initial_states_generator="random", onehotpar = None
+               initial_states=None, initial_states_generator="random",
                **kwargs):
         """Sample from a binary quadratic model using an implemented sample 
         method.
@@ -340,7 +340,7 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
         samples, energies = sa.simulated_annealing(
             num_reads, ldata, irow, icol, qdata,
             num_sweeps_per_beta, beta_schedule,
-            seed, initial_states_array, interrupt_function, onehotpar)
+            seed, onehotpar, initial_states_array, interrupt_function)
         
         print('YATTA!')
 
