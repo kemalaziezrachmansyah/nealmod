@@ -165,7 +165,7 @@ void simulated_annealing_run(
                     if (flip_spin) {
                         state[member_index] *= -1;
                         state[other_index] *= -1;
-                        status = 0;
+                        status = false;
                     }
                     
                     ind++;
