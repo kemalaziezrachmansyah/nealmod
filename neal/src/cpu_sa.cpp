@@ -132,13 +132,12 @@ void simulated_annealing_run(
                 while (status) {
                     if (3*state[member_index] >= 0) {
                         status = false;
+                        member_index = base_index;
                     }
                     else {
                         member_index++;    
                     }
                 }
-                
-                member_index = base_index;
                 
                 ind = 0;
                 status = true;
