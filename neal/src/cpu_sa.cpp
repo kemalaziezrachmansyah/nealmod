@@ -94,7 +94,7 @@ void simulated_annealing_run(
     const vector<vector<double>>& neighbour_couplings,
     const int sweeps_per_beta,
     const vector<double>& beta_schedule,
-    const int ohehotpar
+    const int onehotpar
 ) {
     const int num_vars = h.size();
 
