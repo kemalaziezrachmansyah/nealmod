@@ -105,7 +105,6 @@ void simulated_annealing_run(
     int other_index;
     int base_index;
     double energydiff;
-    char *statedummy = (char*)malloc(num_vars * sizeof(char));
     bool status;
     int ind;
     
@@ -124,7 +123,7 @@ void simulated_annealing_run(
             // the probability.
             const double threshold = 44.36142 / beta;
 
-            for (int group_index = 0; group_index < num_vars/onehotpar; group_index++) {
+            for (int group_index = 0; group_index < num_vars / onehotpar; group_index++) {
                 base_index = group_index*onehotpar;                
                 member_index = base_index;
                 
@@ -138,8 +137,6 @@ void simulated_annealing_run(
                     }
                 }
                 
-                member_index = base_index;
-                
                 ind = 0;
                 status = true;
                 
@@ -149,8 +146,7 @@ void simulated_annealing_run(
                     if (member_index != other_index) {
                         energydiff = get_flip_energy(member_index, state, h, degrees,
                                             neighbors, neighbour_couplings);
-                        free(statedummy);
-                        statedummy = state;
+                        char *statedummy = state;
                         statedummy[member_index] *= -1;
                         energydiff += get_flip_energy(other_index, statedummy, h, degrees,
                                                neighbors, neighbour_couplings);
