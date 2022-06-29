@@ -130,7 +130,7 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
     cdef int _sweeps_per_beta = sweeps_per_beta
     cdef vector[double] _beta_schedule = beta_schedule
     cdef unsigned long long _seed = seed
-    cdef int _ohehotpar = onehotpar
+    cdef int _onehotpar = onehotpar
 
     cdef void* _interrupt_function
     if interrupt_function is None:
