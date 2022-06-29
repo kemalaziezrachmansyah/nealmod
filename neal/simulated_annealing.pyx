@@ -42,7 +42,7 @@ cdef extern from "cpu_sa.h":
 
 
 def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
-                        coupler_weights, sweeps_per_beta, beta_schedule, seed, ohehotpar,
+                        coupler_weights, sweeps_per_beta, beta_schedule, seed, onehotpar,
                         np.ndarray[char, ndim=2, mode="c"] states_numpy,
                         interrupt_function=None):
     """Wraps `general_simulated_annealing` from `cpu_sa.cpp`. Accepts
