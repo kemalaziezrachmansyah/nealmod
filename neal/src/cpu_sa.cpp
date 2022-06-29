@@ -105,6 +105,8 @@ void simulated_annealing_run(
     int other_index;
     double energydiff;
     char* statedummy;
+    bool status;
+    int ind;
     
     
     // perform the sweeps
@@ -129,7 +131,10 @@ void simulated_annealing_run(
                     member_index++;
                 }
                 
-                for (int ind = 1; ind < onehotpar; ind++){
+                ind = 1;
+                status = true;
+                
+                while (ind < onehotpar && status){
                     other_index = (group_index*onehotpar) + ((member_index+ind) % onehotpar);
 
                     energydiff = get_flip_energy(member_index, state, h, degrees,
@@ -160,8 +165,10 @@ void simulated_annealing_run(
                     if (flip_spin) {
                         state[member_index] *= -1;
                         state[other_index] *= -1;
-                        continue;
+                        status = 0;
                     }
+                    
+                    i++;
                 }
             }
         }
