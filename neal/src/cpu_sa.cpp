@@ -17,7 +17,6 @@
 #include <math.h>
 #include <vector>
 #include <stdexcept>
-#include <iostream>
 #include "cpu_sa.h"
 
 // xorshift128+ as defined https://en.wikipedia.org/wiki/Xorshift#xorshift.2B
@@ -110,8 +109,6 @@ void simulated_annealing_run(
     bool status;
     int ind;
     
-    cout << state;
-    
     
     // perform the sweeps
     for (int beta_idx = 0; beta_idx < (int)beta_schedule.size(); beta_idx++) {
@@ -131,9 +128,12 @@ void simulated_annealing_run(
                 base_index = group_index*onehotpar;                
                 member_index = base_index;
                 
-                //while (2*state[member_index] < 0) {
-                //    member_index++;    
-                //}
+                while (2*state[member_index] < 0 && member_index < (base_index + onehotpar)) {
+                    member_index++;    
+                }
+                if (member_index >= (base_index + onehotpar)) {
+                    member_index = base_index;
+                }
                 
                 ind = 0;
                 status = true;
