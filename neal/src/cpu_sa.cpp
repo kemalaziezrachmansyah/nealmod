@@ -133,14 +133,14 @@ void simulated_annealing_run(
                     ind2 = ind1 + 1;
                     
                     while (ind2 < onehotpar && status){
-                        other_index = member_index + ind2;
+                        other_index = group_index*onehotpar + ind2;
                     
                         if (state[member_index] * state[other_index] < 0) {
                             energydiff = get_flip_energy(member_index, state, h, degrees,
                                                 neighbors, neighbour_couplings);
-                            // statedummy = state;
-                            // statedummy[member_index] *= -1;
-                            energydiff += get_flip_energy(other_index, state, h, degrees,
+                            statedummy = state;
+                            statedummy[member_index] *= -1;
+                            energydiff += get_flip_energy(other_index, statedummy, h, degrees,
                                                     neighbors, neighbour_couplings);
 
                             if (energydiff >= threshold) continue;
