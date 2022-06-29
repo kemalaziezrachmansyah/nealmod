@@ -104,7 +104,7 @@ void simulated_annealing_run(
     int member_index;
     int other_index;
     double energydiff;
-    char* statedummy;
+    char *statedummy;
     bool status;
     int ind;
     
