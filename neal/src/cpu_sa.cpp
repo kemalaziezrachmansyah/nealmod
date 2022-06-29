@@ -101,6 +101,11 @@ void simulated_annealing_run(
     uint64_t rand; // this will hold the value of the rng
 
     bool flip_spin;
+    int member_index;
+    int other_index;
+    double energydiff;
+    
+    
     // perform the sweeps
     for (int beta_idx = 0; beta_idx < (int)beta_schedule.size(); beta_idx++) {
         // get the beta value for this sweep
@@ -117,7 +122,7 @@ void simulated_annealing_run(
 
             for (int group_index = 0; group_index < num_vars/onehotpar; group_index++) {
                 member_index = group_index*onehotpar;
-                for (int ind = 0; ind < onehotpar, ind++){
+                for (int ind = 0; ind < onehotpar; ind++){
                     
 
                     if (ind < onehotpar-1) {
