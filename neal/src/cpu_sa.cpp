@@ -93,7 +93,8 @@ void simulated_annealing_run(
     const vector<vector<int>>& neighbors,
     const vector<vector<double>>& neighbour_couplings,
     const int sweeps_per_beta,
-    const vector<double>& beta_schedule
+    const vector<double>& beta_schedule,
+    const int ohehotpar
 ) {
     const int num_vars = h.size();
 
@@ -105,6 +106,9 @@ void simulated_annealing_run(
 
     // build the delta_energy array by getting the delta energy for each
     // variable
+    
+    cout << onehotpar;
+    
     for (int var = 0; var < num_vars; var++) {
         delta_energy[var] = get_flip_energy(var, state, h, degrees,
                                             neighbors, neighbour_couplings);
