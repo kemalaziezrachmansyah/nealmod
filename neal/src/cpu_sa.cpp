@@ -127,9 +127,9 @@ void simulated_annealing_run(
                 member_index = group_index*onehotpar;
                 
                 // finding the position of 1
-                while (state[member_index] != 1) {
-                    member_index++;
-                }
+                // while (state[member_index] != 1) {
+                //   member_index++;
+                // }
                 
                 ind = 1;
                 status = true;
