@@ -125,12 +125,12 @@ void simulated_annealing_run(
                 member_index = group_index*onehotpar;
                 
                 // finding the position of 1
-                while (state[member_index] == -1) {
+                while (state[member_index] != 1) {
                     member_index++;
                 }
                 
                 for (int ind = 0; ind < onehotpar; ind++){
-                    other_index = (group_index*onehotpar) + (member_index+ind % onehotpar);
+                    other_index = (group_index*onehotpar) + ((member_index+ind) % onehotpar);
 
                     energydiff = get_flip_energy(member_index, state, h, degrees,
                                             neighbors, neighbour_couplings);
