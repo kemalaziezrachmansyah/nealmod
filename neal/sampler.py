@@ -254,17 +254,13 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
         parsed = self.parse_initial_states(
             bqm,
             num_reads=num_reads,
-            initial_states=initial_states,
             initial_states_generator=initial_states_generator,
             seed=seed)
 
         num_reads = parsed.num_reads
-        
-        print('parsed_initial_states: ', parsed.initial_states)
 
         # read out the initial states and the variable order
-        initial_states_array = np.ascontiguousarray(
-            parsed.initial_states.record.sample)
+        initial_states_array = np.ascontiguousarray(initial_states)
         
         print('initial_states_array: ', initial_states_array)
 
