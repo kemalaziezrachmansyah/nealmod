@@ -247,7 +247,9 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
             error_msg = ("'seed' should be an integer between 0 and 2^32 - 1: "
                          "value = {}".format(seed))
             raise ValueError(error_msg)
-
+        
+         print('initial_states: ', initial_states)
+        
         # parse the inputs
         parsed = self.parse_initial_states(
             bqm,
@@ -258,7 +260,7 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
 
         num_reads = parsed.num_reads
         
-        print('initial_states: ', parsed.initial_states)
+        print('parsed_initial_states: ', parsed.initial_states)
 
         # read out the initial states and the variable order
         initial_states_array = np.ascontiguousarray(
@@ -267,8 +269,6 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
         print('initial_states_array: ', initial_states_array)
 
         variable_order = parsed.initial_states.variables
-        
-        print('variable_order: ', variable_order)
 
         # read out the BQM
         ldata, (irow, icol, qdata), off = bqm.to_numpy_vectors(
