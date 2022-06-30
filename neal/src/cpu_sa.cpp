@@ -128,7 +128,7 @@ void simulated_annealing_run(
 
                 status = true;
                 while (status) {
-                    if (state[member_index] == 1) {
+                    if (state[member_index] >= 0) {
                         status = false;
                     }
                     else {
