@@ -49,7 +49,7 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
     an Ising problem defined on a general graph and returns samples
     using simulated annealing."""
     
-    print('states_numpy: ', &states_numpy[0,0])
+    print('states_numpy: ', states_numpy)
 
     """
     Parameters
