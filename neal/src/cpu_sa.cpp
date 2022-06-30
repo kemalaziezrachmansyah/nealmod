@@ -135,7 +135,7 @@ void simulated_annealing_run(
                     while (ind2 < onehotpar) {
                         other_index = base_index + ind2;
                         
-                        if (state[member_index] != state[other_index]) {
+                        if (state[member_index] == state[other_index]) {
                             energydiff = get_flip_energy(member_index, state, h, degrees,
                                                 neighbors, neighbour_couplings);
                             char *statedummy = state;
