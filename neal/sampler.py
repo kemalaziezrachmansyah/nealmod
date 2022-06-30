@@ -253,6 +253,7 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
         parsed = self.parse_initial_states(
             bqm,
             num_reads=num_reads,
+            initial_states=initial_states,
             initial_states_generator=initial_states_generator,
             seed=seed)
 
