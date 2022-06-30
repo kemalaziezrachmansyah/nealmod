@@ -17,6 +17,7 @@
 #include <math.h>
 #include <vector>
 #include <stdexcept>
+#include <stdio>
 #include "cpu_sa.h"
 
 // xorshift128+ as defined https://en.wikipedia.org/wiki/Xorshift#xorshift.2B
@@ -97,6 +98,8 @@ void simulated_annealing_run(
     const int onehotpar
 ) {
     const int num_vars = h.size();
+    
+    std::cout << state;
 
     uint64_t rand; // this will hold the value of the rng
 
