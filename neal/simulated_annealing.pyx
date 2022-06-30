@@ -132,6 +132,8 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
     cdef int _onehotpar = onehotpar
     
     print('_states:', _states)
+    print('_states[0]:', _states[0])
+    print('_states[1]:', _states[1])
 
     cdef void* _interrupt_function
     if interrupt_function is None:
