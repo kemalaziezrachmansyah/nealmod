@@ -134,7 +134,7 @@ void simulated_annealing_run(
                     member_index = base_index + (rand1 % 4);
                     other_index = base_index + (rand2 % 4);
 
-                    if (state[member_index] == state[other_index]) {
+                    if (state[member_index] != state[other_index]) {
                         status = false;
                     }
                 }
