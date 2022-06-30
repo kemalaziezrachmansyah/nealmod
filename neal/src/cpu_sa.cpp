@@ -137,7 +137,7 @@ void simulated_annealing_run(
                         if (((state[member_index] == 1) && (state[other_index] == -1)) || ((state[member_index] == -1) && (state[other_index] == 1))) {
                             energydiff = get_flip_energy(member_index, state, h, degrees,
                                                 neighbors, neighbour_couplings);
-                            char dummy = *state;
+                            char dummy = state;
                             char *statedummy = dummy;
                             statedummy[member_index] *= -1;
                             energydiff += get_flip_energy(other_index, state, h, degrees,
