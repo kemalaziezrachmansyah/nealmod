@@ -249,8 +249,6 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
                          "value = {}".format(seed))
             raise ValueError(error_msg)
         
-        print('initial_states: ', initial_states)
-        
         # parse the inputs
         parsed = self.parse_initial_states(
             bqm,
@@ -261,12 +259,14 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
         num_reads = parsed.num_reads
 
         # read out the initial states and the variable order
-        initial_states_array = np.ascontiguousarray(initial_states)
-        
+        initial_states_array = np.ascontiguousarray(
+            parsed.initial_states.record.sample)
         
         print('initial_states_array: ', initial_states_array)
 
         variable_order = parsed.initial_states.variables
+        
+        print('variable order: ', variable_order)
 
         # read out the BQM
         ldata, (irow, icol, qdata), off = bqm.to_numpy_vectors(
