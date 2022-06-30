@@ -99,8 +99,6 @@ void simulated_annealing_run(
     const int num_vars = h.size();
 
     uint64_t rand; // this will hold the value of the rng
-    uint64_t rand1;
-    uint64_t rand2;
 
     bool flip_spin;
     int member_index;
@@ -125,16 +123,25 @@ void simulated_annealing_run(
             const double threshold = 44.36142 / beta;
 
             for (int group_index = 0; group_index < num_vars / onehotpar; group_index++) {
-                base_index = group_index*onehotpar;                
+                base_index = group_index*onehotpar;
+                member_index = base_index;
 
                 status = true;
                 while (status) {
-                    FASTRAND(rand1);
-                    FASTRAND(rand2);
-                    member_index = base_index + (rand1 % 4);
-                    other_index = base_index + (rand2 % 4);
-
-                    if (&state[member_index] != &state[other_index]) {
+                    if (&state[member_index] == 1) {
+                        status = false;
+                    }
+                    else {
+                        member_index++;
+                    }
+                }
+                
+                status = true;
+                while (status) {
+                    FASTRAND(rand);
+                    other_index = base_index + (rand % onehotpar);
+                    
+                    if (other_index != member_index) {
                         status = false;
                     }
                 }
