@@ -99,7 +99,7 @@ void simulated_annealing_run(
 ) {
     const int num_vars = h.size();
     
-    std::cout << state;
+    cout << state;
 
     uint64_t rand; // this will hold the value of the rng
 
@@ -249,6 +249,8 @@ int general_simulated_annealing(
     // assert len(states) == num_samples*num_vars*sizeof(char)
     // assert len(coupler_starts) == len(coupler_ends) == len(coupler_weights)
     // assert max(coupler_starts + coupler_ends) < num_vars
+    
+    cout << states;
     
     // the number of variables in the problem
     const int num_vars = h.size();
