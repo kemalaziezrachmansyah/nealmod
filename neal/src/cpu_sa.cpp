@@ -17,7 +17,7 @@
 #include <math.h>
 #include <vector>
 #include <stdexcept>
-#include <stdio>
+#include <iostream>
 #include "cpu_sa.h"
 
 // xorshift128+ as defined https://en.wikipedia.org/wiki/Xorshift#xorshift.2B
