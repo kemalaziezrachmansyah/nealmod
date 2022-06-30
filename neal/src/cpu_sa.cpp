@@ -17,7 +17,6 @@
 #include <math.h>
 #include <vector>
 #include <stdexcept>
-#include <iostream>
 #include "cpu_sa.h"
 
 // xorshift128+ as defined https://en.wikipedia.org/wiki/Xorshift#xorshift.2B
@@ -98,8 +97,6 @@ void simulated_annealing_run(
     const int onehotpar
 ) {
     const int num_vars = h.size();
-    
-    cout << state;
 
     uint64_t rand; // this will hold the value of the rng
 
@@ -249,8 +246,6 @@ int general_simulated_annealing(
     // assert len(states) == num_samples*num_vars*sizeof(char)
     // assert len(coupler_starts) == len(coupler_ends) == len(coupler_weights)
     // assert max(coupler_starts + coupler_ends) < num_vars
-    
-    cout << states;
     
     // the number of variables in the problem
     const int num_vars = h.size();
