@@ -48,8 +48,6 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
     """Wraps `general_simulated_annealing` from `cpu_sa.cpp`. Accepts
     an Ising problem defined on a general graph and returns samples
     using simulated annealing."""
-    
-    print('states_numpy: ', states_numpy)
 
     """
     Parameters
@@ -130,11 +128,6 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
     cdef vector[double] _beta_schedule = beta_schedule
     cdef unsigned long long _seed = seed
     cdef int _onehotpar = onehotpar
-    
-    print('_states:', _states)
-    print('_states[0]:', _states[0])
-    print('_states[1]:', _states[1])
-    print('type of _states[0]:', type(_states[0]))
 
     cdef void* _interrupt_function
     if interrupt_function is None:
