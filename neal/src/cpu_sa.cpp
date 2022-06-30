@@ -106,8 +106,6 @@ void simulated_annealing_run(
     int base_index;
     double energydiff;
     bool status;
-    int ind;
-    int ind2;
     
     
     // perform the sweeps
@@ -128,9 +126,9 @@ void simulated_annealing_run(
                 base_index = group_index*onehotpar;                
                 member_index = base_index;
 
-                // while ((1*state[member_index] <= 0) && (member_index < (base_index + onehotpar))) {
-                //     member_index++;
-                // }
+                while ((state[member_index] <= 0) && (member_index < (base_index + onehotpar))) {
+                    member_index++;
+                }
 
                 status = true;
                 while (status) {
