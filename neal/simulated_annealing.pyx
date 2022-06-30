@@ -119,7 +119,7 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
     cdef double[:] energies = energies_numpy
 
     # explicitly convert all Python types to C while we have the GIL
-    cdef char* _states = &states_numpy[0, 0]
+    cdef char* _states = &states_numpy[0]
     cdef double* _energies = &energies[0]
     cdef int _num_samples = num_samples
     cdef vector[double] _h = h
