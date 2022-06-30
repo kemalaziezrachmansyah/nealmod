@@ -48,9 +48,6 @@ def simulated_annealing(num_samples, h, coupler_starts, coupler_ends,
     """Wraps `general_simulated_annealing` from `cpu_sa.cpp`. Accepts
     an Ising problem defined on a general graph and returns samples
     using simulated annealing."""
-    
-    print('states_numpy: ', states_numpy)
-    print('onehotpar: ', onehotpar)
 
     """
     Parameters
