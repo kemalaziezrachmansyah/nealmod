@@ -262,12 +262,8 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
         # read out the initial states and the variable order
         initial_states_array = np.ascontiguousarray(
             parsed.initial_states.record.sample)
-        
-        print('initial_states_array: ', initial_states_array)
 
         variable_order = parsed.initial_states.variables
-        
-        print('variable order: ', variable_order)
 
         # read out the BQM
         ldata, (irow, icol, qdata), off = bqm.to_numpy_vectors(
@@ -343,8 +339,6 @@ class SimulatedAnnealingSampler(dimod.Sampler, dimod.Initialized):
             num_reads, ldata, irow, icol, qdata,
             num_sweeps_per_beta, beta_schedule,
             seed, onehotpar, initial_states_array, interrupt_function)
-        
-        print('YATTA!')
 
         info = {
             "beta_range": beta_range,
