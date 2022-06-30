@@ -105,7 +105,6 @@ void simulated_annealing_run(
     int other_index;
     int base_index;
     double energydiff;
-    bool status;
     int ind1;
     int ind2;
     
@@ -125,7 +124,7 @@ void simulated_annealing_run(
             const double threshold = 44.36142 / beta;
 
             for (int group_index = 0; group_index < num_vars / onehotpar; group_index++) {
-                base_index = group_index*onehotpar;
+                base_index = group_index * onehotpar;
                 ind1 = 0;
 
                 while (ind1 < onehotpar) {
@@ -138,9 +137,9 @@ void simulated_annealing_run(
                         if (((state[member_index] == 1) && (state[other_index] == -1)) || ((state[member_index] == -1) && (state[other_index] == 1))) {
                             energydiff = get_flip_energy(member_index, state, h, degrees,
                                                 neighbors, neighbour_couplings);
-                            char *statedummy = state;
-                            statedummy[member_index] *= -1;
-                            energydiff += get_flip_energy(other_index, statedummy, h, degrees,
+                            // char *statedummy = state;
+                            // statedummy[member_index] *= -1;
+                            energydiff += get_flip_energy(other_index, state, h, degrees,
                                                             neighbors, neighbour_couplings);
 
                             flip_spin = false;
