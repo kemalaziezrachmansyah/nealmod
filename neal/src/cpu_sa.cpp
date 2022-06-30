@@ -126,7 +126,7 @@ void simulated_annealing_run(
                 base_index = group_index*onehotpar;                
                 member_index = base_index;
 
-                while ((state[member_index] == char(-1)) && (member_index < (base_index + onehotpar - 1))) {
+                while ((state[member_index] == char(-1)) && (member_index < (base_index + onehotpar))) {
                     member_index++;
                 }
 
